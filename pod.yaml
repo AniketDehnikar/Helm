@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: pod-helm
+  namespace: jobs-cron  
+  labels:
+    name: test
+spec:
+  containers:
+  - name: test
+    image: bitbull/webserver
+    ports:
+    - containerPort: 80      
+     

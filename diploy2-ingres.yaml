@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingre2
+  namespace: ingress-nginx
+  labels:
+    app: ingre2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ingre2
+  template:
+    metadata:
+      labels:
+        app: ingre2
+    spec:
+      containers:
+      - name: container
+        image: severalnines/proxysql
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: servicei2
+  namespace: ingress-nginx
+spec:
+  selector:
+    app: ingre2
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort:
+
